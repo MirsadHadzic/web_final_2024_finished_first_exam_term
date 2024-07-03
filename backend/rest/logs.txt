@@ -1,0 +1,47 @@
+Error: Call to a member function prepare() on null in C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\dao\ExamDao.php:119
+Stack trace:
+#0 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\services\ExamService.php(36): ExamDao->get_foods_report()
+#1 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\routes\ExamRoutes.php(75): ExamService->foods_report()
+#2 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(186): {closure}()
+#3 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(163): flight\core\Dispatcher::callFunction()
+#4 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(368): flight\core\Dispatcher::execute()
+#5 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->_start()
+#6 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(162): flight\core\Dispatcher::invokeMethod()
+#7 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(54): flight\core\Dispatcher::execute()
+#8 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(98): flight\core\Dispatcher->run()
+#9 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->__call()
+#10 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Flight.php(97): flight\core\Dispatcher::invokeMethod()
+#11 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\index.php(17): Flight::__callStatic()
+#12 {main}
+Error: Call to a member function prepare() on null in C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\dao\ExamDao.php:37
+Stack trace:
+#0 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\services\ExamService.php(15): ExamDao->get_customers()
+#1 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\routes\ExamRoutes.php(20): ExamService->get_customers()
+#2 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(186): {closure}()
+#3 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(163): flight\core\Dispatcher::callFunction()
+#4 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(368): flight\core\Dispatcher::execute()
+#5 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->_start()
+#6 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(162): flight\core\Dispatcher::invokeMethod()
+#7 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(54): flight\core\Dispatcher::execute()
+#8 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(98): flight\core\Dispatcher->run()
+#9 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->__call()
+#10 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Flight.php(97): flight\core\Dispatcher::invokeMethod()
+#11 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\index.php(17): Flight::__callStatic()
+#12 {main}
+Error: Call to a member function prepare() on null in C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\dao\ExamDao.php:46
+Stack trace:
+#0 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\dao\ExamDao.php(51): ExamDao->query()
+#1 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\dao\ExamDao.php(72): ExamDao->query_unique()
+#2 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\services\ExamService.php(22): ExamDao->get_customer_meals()
+#3 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\routes\ExamRoutes.php(24): ExamService->get_customer_meals()
+#4 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(188): {closure}()
+#5 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(163): flight\core\Dispatcher::callFunction()
+#6 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(368): flight\core\Dispatcher::execute()
+#7 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->_start()
+#8 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(162): flight\core\Dispatcher::invokeMethod()
+#9 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(54): flight\core\Dispatcher::execute()
+#10 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(98): flight\core\Dispatcher->run()
+#11 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->__call()
+#12 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Flight.php(97): flight\core\Dispatcher::invokeMethod()
+#13 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\index.php(17): Flight::__callStatic()
+#14 {main}

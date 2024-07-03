@@ -1,0 +1,261 @@
+<div class="container mt-3">
+  <!-- Button trigger modal -->
+  <div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#add-customer-modal"
+    >
+      Add Customer
+    </button>
+  </div>
+  <br />
+  <select class="form-select" id="customers-list">
+    <!-- onchange="reload_customers_datatable()" -->
+    <!-- <option selected>Please select one customer</option> -->
+    <!-- <option value="1">Becir Isakovic</option>
+    <option value="2">Dzelila Mehanovic</option>
+    <option value="3">Amela Vatres</option> -->
+  </select>
+  <hr />
+  <div>
+    <table class="table table-striped" id="customer-meals">
+      <thead>
+        <tr>
+          <th>Food name</th>
+          <th>Food brand</th>
+          <th>Meal date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr>
+          <td>Meet fingers</td>
+          <td>Ilidzanka</td>
+          <td>2024-05-28</td>
+        </tr>
+        <tr>
+          <td>Beef</td>
+          <td>AEMS</td>
+          <td>2024-05-29</td>
+        </tr>
+        <tr>
+          <td>Corba</td>
+          <td>Domaca</td>
+          <td>2024-05-30</td>
+        </tr> -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="add-customer-modal"
+  tabindex="-1"
+  aria-labelledby="add-customer-label"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="add-customer-form">
+        <div class="modal-header">
+          <h5 class="modal-title" id="add-customer-label">Add Customer</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3 mt-3">
+            <label for="first_name">First name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="first_name"
+              placeholder="Enter first name"
+              name="first_name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="pwd">Last name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="last_name"
+              placeholder="Enter last name"
+              name="last_name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="birth_date">Birth date:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="birth_date"
+              placeholder="Enter birth date"
+              name="birth_date"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- <script src="../services/customers.js"></script>
+<script src="../services/foods.js"></script> -->
+<script type="text/javascript">
+
+$(document).ready(function() {
+    CustomersService.load_customers();
+
+    $('#add-customer-form').submit(function(event) {
+        event.preventDefault();
+
+        var customerData = {
+            first_name: $('#first_name').val(),
+            last_name: $('#last_name').val(),
+            birth_date: $('#birth_date').val()
+        };
+
+        CustomersService.add_customer(customerData, function(response) {
+            console.log("Customer added successfully:", response);
+            $('#add-customer-modal').modal('hide');
+            CustomersService.load_customers();
+        }, function(error) {
+            console.error("Failed to add customer:", error);
+            alert("Failed to add customer. Please try again.");
+        });
+    });
+});
+  // CustomersService.reload_customers_datatable();
+
+  // $(document).ready(function () {
+  //   CustomersService.fetch_customers();
+  // });
+
+  // $('#customers-list').on('change', function () {
+  //   let customerId = $(this).val();
+  //   if (customerId) {
+  //     CustomersService.fetch_customer_meals(customerId);
+  //   }
+  // });
+
+  // $('#add-customer-modal form').on('submit', function (event) {
+  //   event.preventDefault();
+  //   let formData = FormValidation.serialize_form($(this));
+  //   RestClient.post('customers', formData, function () {
+  //     $('#add-customer-modal').modal('hide');
+  //     toastr.success('Customer added successfully');
+  //     CustomersService.fetch_customers();
+  //   }, function (jqXHR) {
+  //     toastr.error(jqXHR.responseJSON.message);
+  //   });
+  // });
+  
+
+
+
+  // function displayCount(){
+  //     $.get("rest/customers", function(data){
+  //       $("#products-count").text("Total: "+data.length);
+  //     }).fail(function(xhr, status, error) {
+  //       alert("An error occurred while fetching the product count: " + xhr.responseText);
+  // });
+    // }
+    // function listCustomers() {
+    //   $.get("../../backend/rest/", function(data) {
+    //     var html = `<thead>
+    //       <tr>
+    //         <th>ID</th>
+    //         <th>Name</th>
+    //         <th>Image</th>
+    //         <th>Price</th>
+    //         <th>Category</th>
+    //         <th>Actions</th>
+    //       </tr>
+    //     </thead>
+    //     <tbody>`;
+    //     for (let i = 0; i < data.length; i++) {
+    //       html += `<tr>
+    //         <td>` + data[i].id + `</td>
+    //         <td>` + data[i].name + `</td>
+    //         <td><img src="` + data[i].image_url + `" style="width:100px;height:100px;"></td>
+    //         <td>` + data[i].price + `</td>
+    //         <td>` + data[i].category + `</td>
+    //         <td>
+    //           <button class="deletebtn" onclick="deleteRow(` + data[i].id + `)">Delete</button>
+    //           <button class="editbtn" onclick="randomPrice(` + data[i].id + `)">Randomize</button>
+    //         </td>
+    //       </tr>`;
+    //     }
+    //     html += `</tbody>`;
+    //     $("#products-table").html(html);
+    //   });
+    //   displayCount();
+    //}
+    //CustomersService.reload_customers_datatable();
+    //PatientService.reload_patients_datatable();
+
+    // FormValidation.validate("#add-patient-form", {}, function (data) {
+    //   Utils.block_ui("#add-patient-modal");
+    //   $('#add-patient-modal button[type="cancel"]').trigger("click");
+
+    //   RestClient.post(
+    //     "patients/add",
+    //     data,
+    //     function (response) {
+    //       Utils.unblock_ui("#add-patient-modal");
+    //       $("#add-patient-modal").modal("toggle");
+    //       toastr.success("You have successfully added the patient.");
+    //       PatientService.reload_patients_datatable();
+    //     },
+    //     function (xhr) {
+    //       toastr.error(error);
+    //     }
+    //   );
+    // });
+  //   function getName() {
+  //   $.ajax({
+  //       url: Constants.get_api_base_url() + "rest/customers",
+  //       type: 'GET',
+  //       contentType: "application/json",
+  //       dataType: "json",
+  //       success: function(data) {
+  //           console.log('Selected Name:', data); // Debugging
+
+  //           if (Array.isArray(data)) {
+  //               data = data[0]; // Access the first element if data is an array
+  //           }
+  //       },
+  //       error: function(xhr, status, error) {
+  //           console.error('AJAX Error: ', status, error);
+  //       }
+  //   });
+  // }
+
+  
+  /* 
+    1. Populate the <select> HTML element with the id `customers-list` with all 
+       customers from the database (15 points)
+    2. When the select list item changes (other customer is selected) fetch all 
+       meals for the selected customer and populate the table with the id `customer-meals`
+       with the meals you get from the database (15 points)
+    3. Use the modal with id `add-customer-modal` to add customer to the database. (15 points)
+    3.1. After the customer has been added successfully, refresh the list of customers
+         in the select list with the id `customers-list` (5 points)
+   */
+</script>
