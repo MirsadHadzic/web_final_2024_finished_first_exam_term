@@ -10,10 +10,10 @@ class ExamDao {
     public function __construct(){
         try {
 
-          $host = "db1.ibu.edu.ba"; // Replace with your host
-          $dbname = "webfinal"; // Replace with your database name
-          $username = "webfinal_24"; // Replace with your username
-          $password = "web24finPWD"; // Replace with your password
+          $host = ""; // Replace with your host
+          $dbname = ""; // Replace with your database name
+          $username = ""; // Replace with your username
+          $password = ""; // Replace with your password
           /** TODO
            * List parameters such as servername, username, password, schema. Make sure to use appropriate port
            */
