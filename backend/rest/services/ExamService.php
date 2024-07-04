@@ -5,7 +5,9 @@ class ExamService {
     protected $dao;
 
     public function __construct(){
-        $this->dao = new ExamDao();
+        // Pass the table name to the ExamDao constructor
+        $this->dao = new ExamDao('customers'); // Replace 'your_table_name_here' with the actual table name
+        // dodan samo customers
     }
 
     /** TODO
@@ -28,6 +30,7 @@ class ExamService {
     public function add_customer($first_name, $last_name, $birth_date){
         return $this->dao->add_customer($first_name, $last_name, $birth_date);
     }
+
     /** TODO
     * Implement service method to return detailed list of foods
     * and total of nutrients for each food
