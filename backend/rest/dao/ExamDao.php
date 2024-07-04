@@ -10,10 +10,10 @@ class ExamDao {
     public function __construct(){
         try {
 
-          $host = ""; // Replace with your host
-          $dbname = ""; // Replace with your database name
-          $username = ""; // Replace with your username
-          $password = ""; // Replace with your password
+          $host = "localhost"; // Replace with your host
+          $dbname = "webfinal"; // Replace with your database name
+          $username = "root"; // Replace with your username
+          $password = "root"; // Replace with your password
           /** TODO
            * List parameters such as servername, username, password, schema. Make sure to use appropriate port
            */
@@ -124,5 +124,12 @@ class ExamDao {
 
       return $result;
     }
+
+    public function get_user_by_name($first_name, $last_name){
+      return $this->query_unique(
+          "SELECT * FROM customers WHERE first_name = :first_name AND last_name = :last_name",
+          ['first_name' => $first_name, 'last_name' => $last_name]
+      );
+  }
 }
 ?>

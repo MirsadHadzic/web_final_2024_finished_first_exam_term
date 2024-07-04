@@ -1,5 +1,56 @@
 <?php
 
+// Flight::route('/*', function() {
+//     if(
+//         strpos(Flight::request()->url, '/login') === 0
+//     ) {
+//         return TRUE;
+//     } else {
+//         try {
+//             $token = Flight::request()->getHeader("Authentication");
+//             if(!$token)
+//                 Flight::halt(401, "Missing authentication header");
+
+//             $decoded_token = JWT::decode($token, 'mehagamehaga', 'HS256');
+
+//             Flight::set('customer', $decoded_token->customer);
+//             Flight::set('token', $token);
+//             return TRUE;
+//         } catch (\Exception $e) {
+//             Flight::halt(401, $e->getMessage());
+//         }
+//     }
+// });
+
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
+Flight::route('/*', function() {
+    if (
+        strpos(Flight::request()->url, '/login') === 0
+    ) {
+        return TRUE;
+    } else {
+        try {
+            // Get the 'Authentication' header from the request
+            $headers = getallheaders();
+            $token = isset($headers['Authentication']) ? $headers['Authentication'] : null;
+            
+            if (!$token)
+                Flight::halt(401, "Missing authentication header");
+
+            $decoded_token = JWT::decode($token, new Key('mehagamehaga', 'HS256'));
+
+            Flight::set('customer', $decoded_token->customer);
+            Flight::set('token', $token);
+            return TRUE;
+        } catch (\Exception $e) {
+            Flight::halt(401, $e->getMessage());
+        }
+    }
+});
+
+
 Flight::route('GET /connection-check', function(){
     Flight::examService();
     /** TODO
@@ -72,7 +123,13 @@ Flight::route('POST /customers/add', function() {
 });
 
 Flight::route('GET /foods/report', function(){
-    Flight::json(Flight::examService()->foods_report());
+    $data = Flight::examService()->foods_report();
+    if (!$data) {
+        Flight::json(['error' => 'Unauthorized'], 401);
+    } else {
+        Flight::json($data, 200);
+    }
+    //Flight::json(Flight::examService()->foods_report());
     /** TODO
     * This endpoint should return the array of all foods from the database
     * together with the image of the foods. This endpoint should be fully
@@ -89,5 +146,51 @@ Flight::route('GET /foods/report', function(){
     * 15 points
     */
 });
+
+Flight::route('POST /login', function() {
+    $payload = Flight::request()->data->getData();
+
+    $user = Flight::examService()->get_user_by_name($payload['first_name'], $payload['last_name']);
+
+    if (!$user) {
+        Flight::json(['success' => false, 'message' => 'Invalid first or last name'], 401);
+        return;
+    }
+
+    //unset($user['last_name']);
+    
+    $jwt_payload = [
+        'customer' => $user,
+        'iat' => time(),
+        'exp' => time() + (60 * 60 * 24) // valid for 1 day
+    ];
+
+    $token = JWT::encode($jwt_payload, 'mehagamehaga', 'HS256');
+
+    Flight::json(array_merge($user, ['token' => $token]));
+});
+
+// Flight::route('/*', function() {
+//     if(
+//         strpos(Flight::request()->url, '/login') === 0
+//     ) {
+//         return TRUE;
+//     } else {
+//         try {
+//             $token = Flight::request()->getHeader("Authorization");
+//             if(!$token)
+//                 Flight::halt(401, "Missing authorization header");
+
+//             $decoded_token = JWT::decode($token, 'mehagamehaga', 'HS256');
+
+//             Flight::set('customer', $decoded_token->customer);
+//             Flight::set('token', $token);
+//             return TRUE;
+//         } catch (\Exception $e) {
+//             Flight::halt(401, $e->getMessage());
+//         }
+//     }
+// });
+
 
 ?>

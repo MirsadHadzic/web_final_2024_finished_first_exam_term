@@ -35,5 +35,9 @@ class ExamService {
     public function foods_report(){
         return $this->dao->get_foods_report();
     }
+
+    public function get_user_by_name($first_name, $last_name) {
+        return $this->dao->get_user_by_name($first_name, $last_name);
+    }
 }
 ?>
