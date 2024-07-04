@@ -8,9 +8,9 @@ class Config {
     public static function DB_NAME() {
         return Config::get_env("DB_NAME", "webfinal"); // web-project-2024
     }
-    // public static function DB_PORT() {
-    //     return Config::get_env("DB_PORT", 3306); // 25060
-    // }
+    public static function DB_PORT() {
+        return Config::get_env("DB_PORT", 3306); // 25060
+    }
     public static function DB_USER() {
         return Config::get_env("DB_USER", "root"); // doadmin
     }
@@ -21,7 +21,7 @@ class Config {
         return Config::get_env("DB_HOST", "localhost"); // web-project-2024-do-user-14099042-0.c.db.ondigitalocean.com
     }
     public static function JWT_SECRET() {
-        return Config::get_env("JWT_SECRET", "mehagamehaga");
+        return Config::get_env("JWT_SECRET", "mehagamehaga"); // mehagamehaga
     }
     public static function get_env($name, $default) {
         return isset($_ENV[$name]) && trim($_ENV[$name]) != "" ? $_ENV[$name] : $default;
