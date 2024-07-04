@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Login - Dentist</title>
+    <link href="../assets/css/all.min.css" rel="stylesheet" />
+    <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="../assets/css/toastr.min.css" rel="stylesheet" />
+  </head>
+  <body class="bg-primary">
+    <div id="layoutAuthentication">
+      <div id="layoutAuthentication_content">
+        <main>
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-5">
+                <div id="login-form-container" class="card shadow-lg border-0 rounded-lg mt-5">
+                  <div class="card-header">
+                    <h3 class="text-center font-weight-light my-4">Login</h3>
+                  </div>
+                  <div class="card-body">
+                    <form id="login-form">
+                      <div class="form-floating mb-3">
+                        <input
+                          class="form-control"
+                          id="first_name"
+                          type="text"
+                          name="first_name"
+                          placeholder="Mirso"
+                          value="Mirso"
+                        />
+                        <!-- <label for="text">First Name</label> -->
+                      </div>
+                      <div class="form-floating mb-3">
+                        <input
+                          class="form-control"
+                          id="last_name"
+                          type="text"
+                          name="last_name"
+                          placeholder="Promaha"
+                          value="Promaha"
+                        />
+                        <!-- <label for="text">Last Name</label> -->
+                      </div>
+                      <div
+                        class="d-flex align-items-center justify-content-between mt-4 mb-0"
+                      >
+                        <button type="submit" class="btn btn-primary" href="index.html">Login</a>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="card-footer text-center py-3">
+                    <div class="small">
+                      <a href="register.html">Need an account? Sign up!</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/jquery.easing.min.js"></script>
+    <script src="../assets/js/sb-admin-2.min.js"></script>
+
+    <script src="../assets/js/jquery.validate.min.js"></script>
+    <script src="../assets/js/additional-methods.min.js"></script>
+    <script src="../assets/js/block-ui.js"></script>
+    <script src="../assets/js/toastr.min.js"></script>
+
+    <script src="../utils/constants.js"></script>
+    <script src="../utils/utils.js"></script>
+    <script src="../utils/form_validation.js"></script>
+    <script src="../utils/rest_client.js"></script>
+
+    <script>
+        if (Utils.get_from_localstorage("token")) {
+            window.location = "../";
+        }
+
+        FormValidation.validate("#login-form", {}, function(data) {
+            Utils.block_ui("#login-form-container");
+
+            RestClient.post(
+            'rest/login',
+            data,
+            function (response) {
+                Utils.unblock_ui("#login-form-container");
+                
+                // Extract and save only the token
+                Utils.set_to_localstorage("token", response.token);
+                
+                window.location = "../";
+            },
+            function (error) {
+                Utils.unblock_ui("#login-form-container");
+                toastr.error(error.responseText);
+            }
+            );
+    });
+    </script>
+  </body>
+</html>

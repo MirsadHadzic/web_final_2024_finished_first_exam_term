@@ -63,9 +63,10 @@ var Utils = {
         url: url,
         type: "GET",
         headers: {
-          "Authentication": Utils.get_from_localstorage("user").token
+          "Authentication": Utils.get_from_localstorage("token")
         }
       },
+      // "Authentication": Utils.get_from_localstorage("user").token
       lengthMenu: [
         [5, 10, 15, 50, 100, 200, 500, 5000],
         [5, 10, 15, 50, 100, 200, 500, "ALL"],
