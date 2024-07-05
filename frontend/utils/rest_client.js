@@ -2,7 +2,7 @@ var RestClient = {
   get: function (url, callback, error_callback) {
 
     const token = Utils.get_from_localstorage("token");
-    if (!token && window.location.pathname !== "/final20244/frontend/pages/login.html") {
+    if (!token && (window.location.pathname !== "/final20244/frontend/pages/login.html" || window.location.pathname !== "https://walrus-app-4o96g.ondigitalocean.app/frontend/pages/login.html")) {
       alert("No authentication token found. Redirecting to login page.");
       window.location.href = "pages/login.html";
       return;
@@ -28,7 +28,7 @@ var RestClient = {
   request: function (url, method, data, callback, error_callback) {
 
     const token = Utils.get_from_localstorage("token");
-    if (!token && window.location.pathname !== "/final20244/frontend/pages/login.html") {
+    if (!token && (window.location.pathname !== "/final20244/frontend/pages/login.html" || window.location.pathname !== "https://walrus-app-4o96g.ondigitalocean.app/frontend/pages/login.html")) {
       alert("No authentication token found. Redirecting to login page.");
       window.location.href = "pages/login.html";
       return;

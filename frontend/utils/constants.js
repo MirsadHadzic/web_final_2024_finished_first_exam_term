@@ -3,7 +3,7 @@ var Constants = {
     if(location.hostname == 'localhost'){
       return "http://localhost/final20244/backend/";
     } else {
-      return "http://localhost/final20244/backend/";
+      return "https://walrus-app-4o96g.ondigitalocean.app/backend";
     }
   }
 };
