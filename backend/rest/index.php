@@ -14,5 +14,16 @@ Flight::map('error', function($e){
     Flight::halt($e->getCode(), $e->getMessage());
 });
 
+function allow_preflight() {
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        header('Access-Control-Allow-Headers: Request, Origin, Content-Type');
+        header('Access-Control-Allow-Origin: *');
+        die();
+    } else {
+        header('Access-Control-Allow-Origin: *');
+    }
+  }
+  allow_preflight();
+
 Flight::start();
  ?>
