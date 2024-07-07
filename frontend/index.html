@@ -29,6 +29,17 @@
       </button>
       <!-- Navbar Brand-->
       <a class="navbar-brand ps-3" href="index.html">Web Programming</a>
+
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user fa-fw"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <li><a class="dropdown-item" id="logoutBtn" href="#" onclick="logout()">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
     </nav>
     <div id="layoutSidenav">
       <div id="layoutSidenav_nav">
@@ -81,6 +92,7 @@
 
     <script src="./services/customers.js"></script>
     <script src="./services/foods.js"></script>
+    <script src="./services/logout.js"></script>
 
     <script src="./utils/utils.js"></script>
     <script src="./utils/constants.js"></script>

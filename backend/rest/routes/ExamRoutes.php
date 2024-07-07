@@ -192,5 +192,29 @@ Flight::route('POST /login', function() {
 //     }
 // });
 
+Flight::route('POST /logout', function() {
+    try {
+        $headers = getallheaders();
+        $token = isset($headers['Authentication']) ? $headers['Authentication'] : null;
+
+        if (!$token) {
+            Flight::halt(401, "Missing authentication header");
+        }
+
+        $decoded_token = JWT::decode($token, new Key(Config::JWT_SECRET(), 'HS256'));
+
+        // Optionally, you could invalidate the token in your database or blacklist it
+        // Example: blacklistToken($token);
+
+        Flight::json([
+            'message' => 'Successfully logged out',
+            'jwt_decoded' => $decoded_token,
+            //'customer' => $decoded_token->customer,
+            'timestamp' => date("Y/m/d H:i:s")
+        ]);
+    } catch (\Exception $e) {
+        Flight::halt(401, $e->getMessage());
+    }
+});
 
 ?>
