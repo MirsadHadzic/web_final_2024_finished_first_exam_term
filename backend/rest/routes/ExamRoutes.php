@@ -50,7 +50,20 @@ Flight::route('/*', function() {
     }
 });
 
-
+/**
+ * @OA\Get(
+ *      path="/rest/connection-check",
+ *      tags={"customers"},
+ *      summary="connection-check",
+ *      security={
+ *          {"ApiKeyAuth": {}}   
+ *      },
+ *      @OA\Response(
+ *           response=200,
+ *           description="connection-check"
+ *      )
+ * )
+ */
 Flight::route('GET /connection-check', function(){
     Flight::examService();
     /** TODO
@@ -61,6 +74,20 @@ Flight::route('GET /connection-check', function(){
     */
 });
 
+/**
+ * @OA\Get(
+ *      path="/rest/customers",
+ *      tags={"customers"},
+ *      summary="Get all customers - route for customers",
+ *      security={
+ *          {"ApiKeyAuth": {}}   
+ *      },
+ *      @OA\Response(
+ *           response=200,
+ *           description="Array of all customers in the database"
+ *      )
+ * )
+ */
 Flight::route('GET /customers', function(){
     /** TODO
     * This endpoint returns list of all customers that will be used
@@ -71,6 +98,21 @@ Flight::route('GET /customers', function(){
     Flight::json(Flight::examService()->get_customers());
 });
 
+    /**
+     * @OA\Get(
+     *      path="/rest/customer/meals/{customer_id}",
+     *      tags={"customers"},
+     *      summary="Get customer by id",
+     *      security={
+     *          {"ApiKeyAuth": {}}   
+     *      },
+     *      @OA\Response(
+     *           response=200,
+     *           description="Customer data, or false if customer does not exist"
+     *      ),
+     *      @OA\Parameter(@OA\Schema(type="number"), in="path", name="customer_id", example="1", description="Customer ID")
+     * )
+     */
 Flight::route('GET /customer/meals/@customer_id', function($customer_id){
     $meals = Flight::examService()->get_customer_meals($customer_id);
 
@@ -97,6 +139,29 @@ Flight::route('GET /customer/meals/@customer_id', function($customer_id){
     // }
 });
 
+    /**
+     * @OA\Post(
+     *      path="/rest/customers/add",
+     *      tags={"customers"},
+     *      summary="Add customer data to the database",
+     *      security={
+     *          {"ApiKeyAuth": {}}   
+     *      },
+     *      @OA\Response(
+     *           response=200,
+     *           description="Customer data, or exception if customer is not added properly"
+     *      ),
+     *      @OA\RequestBody(
+     *          description="Customer data payload",
+     *          @OA\JsonContent(
+     *              required={"first_name","last_name","birth_date"},
+     *              @OA\Property(property="first_name", type="string", example="Meho", description="first_name"),
+     *              @OA\Property(property="last_name", type="string", example="Mehic", description="last_name"),
+     *              @OA\Property(property="birth_date", type="string", example="07/07/24", description="birth_date"),
+     *          )
+     *      )
+     * )
+     */
 Flight::route('POST /customers/add', function() {
     // $first_name = Flight::request()->data['first_name'];
     // $last_name = Flight::request()->data['last_name'];
@@ -122,6 +187,20 @@ Flight::route('POST /customers/add', function() {
     */
 });
 
+/**
+ * @OA\Get(
+ *      path="/rest/foods/report",
+ *      tags={"customers"},
+ *      summary="Get foods report",
+ *      security={
+ *          {"ApiKeyAuth": {}}   
+ *      },
+ *      @OA\Response(
+ *           response=200,
+ *           description="Array of foods report in the database"
+ *      )
+ * )
+ */
 Flight::route('GET /foods/report', function(){
     $data = Flight::examService()->foods_report();
     if (!$data) {
@@ -147,6 +226,25 @@ Flight::route('GET /foods/report', function(){
     */
 });
 
+    /**
+     * @OA\Post(
+     *      path="/rest/login",
+     *      tags={"login"},
+     *      summary="Login to the system using first and last name",
+     *      @OA\Response(
+     *           response=200,
+     *           description="Data and JWT"
+     *      ),
+     *      @OA\RequestBody(
+     *          description="Credentials",
+     *          @OA\JsonContent(
+     *              required={"first_name","last_name"},
+     *              @OA\Property(property="first_name", type="string", example="Mirso", description="first_name"),
+     *              @OA\Property(property="last_name", type="string", example="Promaha", description="last_name")
+     *          )
+     *      )
+     * )
+     */
 Flight::route('POST /login', function() {
     $payload = Flight::request()->data->getData();
 
@@ -192,6 +290,20 @@ Flight::route('POST /login', function() {
 //     }
 // });
 
+    /**
+     * @OA\Post(
+     *      path="/rest/logout",
+     *      tags={"login"},
+     *      summary="Logout from the system",
+     *      security={
+     *          {"ApiKeyAuth": {}}   
+     *      },
+     *      @OA\Response(
+     *           response=200,
+     *           description="Success response or exception if unable to verify jwt token"
+     *      ),
+     * )
+     */
 Flight::route('POST /logout', function() {
     try {
         $headers = getallheaders();
