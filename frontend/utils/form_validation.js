@@ -17,10 +17,15 @@ var FormValidation = {
         event.preventDefault();
         success.show();
         error.hide();
-        if (form_submit_handler_callback)
-          form_submit_handler_callback(
-            FormValidation.serialize_form(form_object)
-          );
+        // if (form_submit_handler_callback)
+        //   form_submit_handler_callback(
+        //     FormValidation.serialize_form(form_object)
+        //   );
+        if (form_submit_handler_callback) {
+          form_submit_handler_callback(FormValidation.serialize_form(form_object));
+        } else {
+          console.error("form_submit_handler_callback is not defined");
+        }
       },
     });
   },

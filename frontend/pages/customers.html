@@ -119,28 +119,56 @@
 <script src="../services/foods.js"></script> -->
 <script type="text/javascript">
 
-$(document).ready(function() {
-    CustomersService.load_customers();
+  $(document).ready(function () {
+  CustomersService.load_customers();
 
-    $('#add-customer-form').submit(function(event) {
-        event.preventDefault();
+  // Custom validator to check if input is a string containing only letters
+  $.validator.addMethod("isString", function (value, element) {
+    return this.optional(element) || /^[a-zA-Z]+$/.test(value);
+  }, "This field should contain only letters.");
 
-        var customerData = {
-            first_name: $('#first_name').val(),
-            last_name: $('#last_name').val(),
-            birth_date: $('#birth_date').val()
-        };
+  // Custom validator for notEqualTo
+  $.validator.addMethod("notEqualTo", function (value, element, param) {
+    return this.optional(element) || value.toLowerCase() !== $(param).val().toLowerCase();
+  }, "This value should be different.");
 
-        CustomersService.add_customer(customerData, function(response) {
-            console.log("Customer added successfully:", response);
-            $('#add-customer-modal').modal('hide');
-            CustomersService.load_customers();
-        }, function(error) {
-            console.error("Failed to add customer:", error);
-            alert("Failed to add customer. Please try again.");
-        });
-    });
+  // Correctly call the validate function with the callback
+  FormValidation.validate(
+    "#add-customer-form",
+    {
+      first_name: {
+        required: true,
+        minlength: 3,
+        maxlength: 10,
+        isString: true
+      },
+      last_name: {
+        required: true,
+        minlength: 3,
+        maxlength: 10,
+        notEqualTo: "#first_name",
+        isString: true
+      },
+      birth_date: {
+        required: true,
+        date: true,
+      },
+    },
+    function (data) { // This is the form_submit_handler_callback
+      console.log("Form Data:", data);
+      // Perform your AJAX call or other actions here
+      CustomersService.add_customer(data, function(response) {
+        console.log("Customer added successfully:", response);
+        $('#add-customer-modal').modal('hide');
+        CustomersService.load_customers();
+      }, function(error) {
+        console.error("Failed to add customer:", error);
+        alert("Failed to add customer. Please try again.");
+      });
+    }
+  );
 });
+
   // CustomersService.reload_customers_datatable();
 
   // $(document).ready(function () {
@@ -258,4 +286,48 @@ $(document).ready(function() {
     3.1. After the customer has been added successfully, refresh the list of customers
          in the select list with the id `customers-list` (5 points)
    */
+
+// OVO JE ZADNJE DODANO, U SLUCAJU DA ZATREBA, NE DAJ TI BOZE
+
+  //  $(document).ready(function () {
+  //   // Function to populate customers list
+  //   function populateCustomersList() {
+  //     CustomersService.fetch_customers(function (customers) {
+  //       let customersList = $('#customers-list');
+  //       customersList.empty(); // Clear existing options
+  //       customersList.append('<option selected>Please select one customer</option>');
+  //       customers.forEach(function (customer) {
+  //         customersList.append(`<option value="${customer.id}">${customer.first_name} ${customer.last_name}</option>`);
+  //       });
+  //     }, function (error) {
+  //       console.error('Failed to fetch customers:', error);
+  //       alert('Failed to load customers. Please try again.');
+  //     });
+  //   }
+
+  //   // Populate customers list on page load
+  //   populateCustomersList();
+
+  //   // Event listener for customer selection
+  //   $('#customers-list').on('change', function () {
+  //     let customerId = $(this).val();
+  //     if (customerId) {
+  //       CustomersService.fetch_customer_meals(customerId, function (meals) {
+  //         let mealsTable = $('#customer-meals tbody');
+  //         mealsTable.empty(); // Clear existing rows
+  //         meals.forEach(function (meal) {
+  //           mealsTable.append(`
+  //             <tr>
+  //               <td>${meal.food_name}</td>
+  //               <td>${meal.food_brand}</td>
+  //               <td>${meal.meal_date}</td>
+  //             </tr>
+  //           `);
+  //         });
+  //       }, function (error) {
+  //         console.error('Failed to fetch customer meals:', error);
+  //         alert('Failed to load meals. Please try again.');
+  //       });
+  //     }
+  //   });
 </script>

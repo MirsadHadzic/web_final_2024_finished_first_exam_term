@@ -11,3 +11,35 @@ Stack trace:
 #8 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Flight.php(97): flight\core\Dispatcher::invokeMethod()
 #9 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\index.php(28): Flight::__callStatic()
 #10 {main}
+PDOException: SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '' for column 'birth_date' at row 1 in C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\dao\ExamDao.php:68
+Stack trace:
+#0 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\dao\ExamDao.php(68): PDOStatement->execute()
+#1 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\services\ExamService.php(31): ExamDao->add_customer()
+#2 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\routes\ExamRoutes.php(175): ExamService->add_customer()
+#3 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(186): {closure}()
+#4 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(163): flight\core\Dispatcher::callFunction()
+#5 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(368): flight\core\Dispatcher::execute()
+#6 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->_start()
+#7 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(162): flight\core\Dispatcher::invokeMethod()
+#8 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(54): flight\core\Dispatcher::execute()
+#9 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(98): flight\core\Dispatcher->run()
+#10 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->__call()
+#11 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Flight.php(97): flight\core\Dispatcher::invokeMethod()
+#12 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\index.php(28): Flight::__callStatic()
+#13 {main}
+PDOException: SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '' for column 'birth_date' at row 1 in C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\dao\ExamDao.php:68
+Stack trace:
+#0 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\dao\ExamDao.php(68): PDOStatement->execute()
+#1 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\services\ExamService.php(31): ExamDao->add_customer()
+#2 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\routes\ExamRoutes.php(175): ExamService->add_customer()
+#3 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(186): {closure}()
+#4 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(163): flight\core\Dispatcher::callFunction()
+#5 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(368): flight\core\Dispatcher::execute()
+#6 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->_start()
+#7 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(162): flight\core\Dispatcher::invokeMethod()
+#8 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(54): flight\core\Dispatcher::execute()
+#9 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(98): flight\core\Dispatcher->run()
+#10 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->__call()
+#11 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Flight.php(97): flight\core\Dispatcher::invokeMethod()
+#12 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\index.php(28): Flight::__callStatic()
+#13 {main}
