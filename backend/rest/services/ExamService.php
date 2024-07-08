@@ -42,5 +42,10 @@ class ExamService {
     public function get_user_by_name($first_name, $last_name) {
         return $this->dao->get_user_by_name($first_name, $last_name);
     }
+
+        public function get_nutrients()
+        {
+            return $this->dao->get_nutrients();
+        }
 }
 ?>

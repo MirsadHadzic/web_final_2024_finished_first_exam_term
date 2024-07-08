@@ -329,4 +329,14 @@ Flight::route('POST /logout', function() {
     }
 });
 
+Flight::route('GET /nutrients', function(){
+    /** TODO
+    * This endpoint returns list of all customers that will be used
+    * to populate the <select> list
+    * This endpoint should return output in JSON format
+    * 10 points
+    */
+    Flight::json(Flight::examService()->get_nutrients());
+});
+
 ?>

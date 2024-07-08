@@ -26,6 +26,14 @@ class ExamDao {
         return $result;
     }
 
+    public function get_nutrients() {
+      $query = "SELECT * FROM nutrients";
+      $stmt = $this->conn->prepare($query);
+      $stmt->execute();
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $result;
+  }
+
     protected function query($query, $params) {
         $statement = $this->conn->prepare($query);
         $statement->execute($params);

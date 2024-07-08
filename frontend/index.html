@@ -59,6 +59,12 @@
                 </div>
                 Foods
               </a>
+              <a class="nav-link" href="#charts">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-tachometer-alt"></i>
+                </div>
+                Charts
+              </a>
             </div>
           </div>
         </nav>
@@ -67,6 +73,7 @@
         <main id="spapp" role="main">
           <section id="customers" data-load="customers.html"></section>
           <section id="foods" data-load="foods.html"></section>
+          <section id="charts" data-load="charts.html"></section>
         </main>
         <footer class="py-4 bg-light mt-auto">
           <div class="container-fluid px-4">
@@ -90,9 +97,15 @@
     <script src="./assets/js/toastr.min.js"></script>
     <script src="./assets/js/dataTables-latest.js"></script>
 
+    <!-- Page level custom scripts -->
+    <!-- <script src="../assets/js/demo/datatables-demo.js"></script> -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!-- <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script> -->
+
     <script src="./services/customers.js"></script>
     <script src="./services/foods.js"></script>
     <script src="./services/logout.js"></script>
+    <script src="./services/charts.js"></script>
 
     <script src="./utils/utils.js"></script>
     <script src="./utils/constants.js"></script>

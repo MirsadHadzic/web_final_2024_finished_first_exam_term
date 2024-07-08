@@ -1,3 +1,4 @@
+
 var FoodsService = {
     load_foods_report: function () {
         RestClient.get("rest/foods/report", function(response) {
