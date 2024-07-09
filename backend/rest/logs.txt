@@ -19,3 +19,45 @@ Stack trace:
 #16 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Flight.php(97): flight\core\Dispatcher::invokeMethod()
 #17 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\index.php(28): Flight::__callStatic()
 #18 {main}
+ErrorException: Undefined array key "imena_naka" in C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\routes\ExamRoutes.php:466
+Stack trace:
+#0 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\routes\ExamRoutes.php(466): flight\Engine->handleError()
+#1 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(188): {closure}()
+#2 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(163): flight\core\Dispatcher::callFunction()
+#3 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(368): flight\core\Dispatcher::execute()
+#4 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->_start()
+#5 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(162): flight\core\Dispatcher::invokeMethod()
+#6 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(54): flight\core\Dispatcher::execute()
+#7 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(98): flight\core\Dispatcher->run()
+#8 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->__call()
+#9 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Flight.php(97): flight\core\Dispatcher::invokeMethod()
+#10 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\index.php(28): Flight::__callStatic()
+#11 {main}
+ErrorException: Undefined array key "imena_naka" in C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\routes\ExamRoutes.php:466
+Stack trace:
+#0 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\routes\ExamRoutes.php(466): flight\Engine->handleError()
+#1 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(188): {closure}()
+#2 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(163): flight\core\Dispatcher::callFunction()
+#3 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(368): flight\core\Dispatcher::execute()
+#4 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->_start()
+#5 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(162): flight\core\Dispatcher::invokeMethod()
+#6 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(54): flight\core\Dispatcher::execute()
+#7 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(98): flight\core\Dispatcher->run()
+#8 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->__call()
+#9 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Flight.php(97): flight\core\Dispatcher::invokeMethod()
+#10 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\index.php(28): Flight::__callStatic()
+#11 {main}
+ErrorException: Undefined array key "imena_naka" in C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\routes\ExamRoutes.php:466
+Stack trace:
+#0 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\routes\ExamRoutes.php(466): flight\Engine->handleError()
+#1 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(188): {closure}()
+#2 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(163): flight\core\Dispatcher::callFunction()
+#3 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(368): flight\core\Dispatcher::execute()
+#4 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->_start()
+#5 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(162): flight\core\Dispatcher::invokeMethod()
+#6 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(54): flight\core\Dispatcher::execute()
+#7 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Engine.php(98): flight\core\Dispatcher->run()
+#8 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\core\Dispatcher.php(219): flight\Engine->__call()
+#9 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\vendor\mikecao\flight\flight\Flight.php(97): flight\core\Dispatcher::invokeMethod()
+#10 C:\Bitnami\wampstack-8.1.2-0\apache2\htdocs\final20244\backend\rest\index.php(28): Flight::__callStatic()
+#11 {main}

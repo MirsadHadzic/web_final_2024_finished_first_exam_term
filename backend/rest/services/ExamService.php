@@ -77,5 +77,19 @@ class ExamService {
             throw new Exception("No rows were updated", 500);
         }
     }
+
+    public function updateMeho($id, $imena_naka, $prezimena_naka, $brojevi_naki)
+    {
+        return $this->dao->updateMeho($id, $imena_naka, $prezimena_naka, $brojevi_naki);
+    }
+    
+    public function addMeho($imena_naka, $prezimena_naka, $brojevi_naki) {
+        return $this->dao->addMeho($imena_naka, $prezimena_naka, $brojevi_naki);
+    }
+
+    public function updateMeho2($id, $imena_naka, $prezimena_naka, $brojevi_naki)
+    {
+        return $this->dao->updateMeho($id, $imena_naka, $prezimena_naka, $brojevi_naki);
+    }
 }
 ?>

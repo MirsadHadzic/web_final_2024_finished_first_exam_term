@@ -77,6 +77,28 @@ class ExamDao {
     return $stmt->rowCount(); // Returns the number of affected rows
 }
 
+public function updateMeho($id, $imena_naka, $prezimena_naka, $brojevi_naki) {
+  $query = "UPDATE meho SET imena_naka = :imena_naka, prezimena_naka = :prezimena_naka, brojevi_naki = :brojevi_naki WHERE id = :id";
+  $params = [
+      ":id" => $id,
+      ":imena_naka" => $imena_naka,
+      ":prezimena_naka" => $prezimena_naka,
+      ":brojevi_naki" => $brojevi_naki
+  ];
+  $this->execute($query, $params);
+}
+
+public function addMeho($imena_naka, $prezimena_naka, $brojevi_naki) {
+  $query = "INSERT INTO meho (imena_naka, prezimena_naka, brojevi_naki)
+            VALUES (:imena_naka, :prezimena_naka, :brojevi_naki)";
+  $stmt = $this->conn->prepare($query);
+  $stmt->bindParam(':imena_naka', $imena_naka);
+  $stmt->bindParam(':prezimena_naka', $prezimena_naka);
+  $stmt->bindParam(':brojevi_naki', $brojevi_naki);
+  $stmt->execute();
+  return $this->conn->lastInsertId();
+}
+
   public function get_meho()
   {
     $query = "SELECT * FROM meho";
@@ -165,6 +187,20 @@ class ExamDao {
             ['first_name' => $first_name, 'last_name' => $last_name]
         );
     }
+
+    // Inside your ExamService or equivalent
+public function updateMeho2($id, $imena_naka, $prezimena_naka, $brojevi_naki)
+{
+    $query = "UPDATE meho SET imena_naka = :imena_naka, prezimena_naka = :prezimena_naka, brojevi_naki = :brojevi_naki WHERE id = :id";
+    $params = [
+        ":id" => $id,
+        ":imena_naka" => $imena_naka,
+        ":prezimena_naka" => $prezimena_naka,
+        ":brojevi_naki" => $brojevi_naki
+    ];
+    $this->execute($query, $params);
+}
+
 }
     // private $conn;
 
@@ -193,4 +229,5 @@ class ExamDao {
     //     }
     // }
 
+    
 ?>

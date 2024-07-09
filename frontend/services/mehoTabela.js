@@ -1,53 +1,134 @@
-var MehoTabelaService = {
-    load_meho_tabela: function () {
-        RestClient.get("rest/meho", function(response) {
-            console.log(response); // Debugging line to inspect the response
-
-            if (!response || !Array.isArray(response)) {
-                console.error("Invalid response structure:", response);
-                return;
+$(document).ready(function () {
+    // Initialize DataTable
+    var table = $('#tbl_meho').DataTable({
+        ajax: {
+            url: 'http://localhost/final20244/backend/rest/meho',
+            dataSrc: '',
+            beforeSend: function (xhr) {
+                const token = Utils.get_from_localstorage("token");
+                if (token) {
+                    xhr.setRequestHeader("Authentication", token);
+                }
             }
+        },
+        columns: [
+            { data: null, defaultContent: '<button class="btn btn-primary btn-edit">Edit</button> <button class="btn btn-danger btn-delete">Delete</button>' },
+            { data: 'imena_naka' },
+            { data: 'prezimena_naka' },
+            { data: 'brojevi_naki' }
+        ]
+    });
 
-            var mehoTable = $('#mehoTabela-table tbody');
-            mehoTable.empty();
-            response.forEach(function(meho) {
-                var row = '<tr>' +
-                          '<td>' + meho.imena_naka + '</td>' +
-                          '<td>' + meho.prezimena_naka + '</td>' +
-                          '<td>' + meho.brojevi_naki + '</td>' +
-                          '<td>' +
-                          '<button class="deletebtn" onclick="MehoTabelaService.deleteRow(' + meho.id + ')">Delete</button>' +
-                          '<button class="randomizebtn" onclick="MehoTabelaService.randomPrice(' + meho.id + ')">Randomize</button>' +
-                          '</td>' +
-                          '</tr>';
-                mehoTable.append(row);
+    // Open modal for adding
+    $('#btn-add').on('click', function () {
+        $('#add-meho-modal').modal('show');
+    });
+
+    // Form submission for adding
+    $('#add-meho-form').on('submit', function (e) {
+        e.preventDefault();
+        var formData = $(this).serialize();
+
+        const token = Utils.get_from_localstorage("token");
+
+        $.ajax({
+            url: 'http://localhost/final20244/backend/rest/add/meho',
+            type: 'POST',
+            data: formData,
+            headers: {
+                "Authentication": token
+            },
+            success: function () {
+                $('#add-meho-modal').modal('hide');
+                table.ajax.reload();
+                toastr.success('Entry added successfully.');
+            },
+            error: function (error) {
+                toastr.error('Error adding entry.');
+            }
+        });
+    });
+
+// Form submission for editing
+var table = $('#tbl_meho').DataTable({
+    // Your DataTable configuration
+});
+
+$(document).ready(function () {
+    // Open modal for editing
+    $('#tbl_meho tbody').on('click', '.btn-edit', function () {
+        var id = $(this).data('id');
+        var rowData = table.row($(this).parents('tr')).data();
+
+        $('#edit-id').val(id);
+        $('#edit-imena_naka').val(rowData.imena_naka);
+        $('#edit-prezimena_naka').val(rowData.prezimena_naka);
+        $('#edit-brojevi_naki').val(rowData.brojevi_naki);
+
+        $('#edit-meho-modal').modal('show'); // Ensure modal opens
+    });
+
+    // Form submission for editing
+    $('#edit-meho-form').on('submit', function (e) {
+        e.preventDefault();
+        var formData = $(this).serialize(); // Serialize form data
+        var id = $('#edit-id').val(); // Get ID from hidden input
+
+        const token = Utils.get_from_localstorage("token");
+
+        $.ajax({
+            url: 'http://localhost/final20244/backend/rest/meho/' + id,
+            type: 'PUT',
+            data: formData,
+            headers: {
+                "Authentication": token
+            },
+            success: function (data) {
+                $('#edit-meho-modal').modal('hide');
+                table.ajax.reload(); // Reload DataTable after update
+                toastr.success('Entry updated successfully.');
+            },
+            error: function (xhr, status, error) {
+                toastr.error('Error updating entry: ' + xhr.responseText);
+            }
+        });
+    });
+});
+
+
+
+
+    // Delete entry
+    $('#tbl_meho tbody').on('click', '.btn-delete', function () {
+        var data = table.row($(this).parents('tr')).data();
+        if (confirm('Do you want to delete entry with ID ' + data.id + '?')) {
+            const token = Utils.get_from_localstorage("token");
+
+            $.ajax({
+                url: 'http://localhost/final20244/backend/rest/meho/' + data.id,
+                type: 'DELETE',
+                headers: {
+                    "Authentication": token
+                },
+                success: function () {
+                    table.ajax.reload();
+                    toastr.success('Entry deleted successfully.');
+                },
+                error: function (error) {
+                    toastr.error('Error deleting entry.');
+                }
             });
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            console.error("Request failed: ", textStatus, errorThrown);
-        });
-    },
+        }
+    });
 
-    deleteRow: function(id) {
-        console.log("Deleting ID: ", id); // Debugging line to inspect the id
-        RestClient.delete('rest/meho/' + id, {}, function(data) {
-            alert("You have successfully deleted this item!");
-            MehoTabelaService.load_meho_tabela(); // Refresh the list
-        }, function(jqXHR, textStatus, errorThrown) {
-            alert("An error occurred while deleting the item: " + jqXHR.responseText);
-        });
-    },
+    // Reset form on modal close
+    $('#add-meho-modal').on('hidden.bs.modal', function () {
+        $('#add-meho-form')[0].reset();
+    });
 
-    randomPrice: function(id) {
-        console.log("Randomizing ID: ", id); // Debugging line to inspect the id
-        RestClient.post('rest/meho/' + id, {}, function(data) {
-            alert("You have successfully generated a random number!");
-            MehoTabelaService.load_meho_tabela(); // Refresh the list
-        }, function(jqXHR, textStatus, errorThrown) {
-            alert("An error occurred while generating the random number: " + jqXHR.responseText);
-        });
-    }
-};
-
-$(document).ready(function() {
-    MehoTabelaService.load_meho_tabela();
+    // Reset form on modal close
+    $('#edit-meho-modal').on('hidden.bs.modal', function () {
+        $('#edit-meho-form')[0].reset();
+        $('#edit-id').val('');
+    });
 });

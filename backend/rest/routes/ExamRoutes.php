@@ -51,6 +51,23 @@ Flight::route('/*', function() {
     }
 });
 
+
+Flight::route('POST /meho/@id', function($id) {
+    if (!$id || $id == '') {
+        Flight::halt(400, "ID is required");
+    }
+
+    try {
+        // Update product
+        $response = Flight::examService()->updateProductRandomNumber($id);
+
+        Flight::json($response, 201); // Created
+    } catch (Exception $e) {
+        error_log("Error: " . $e->getMessage());
+        Flight::halt($e->getCode() ?: 500, $e->getMessage());
+    }
+});
+
 /**
  * @OA\Get(
  *      path="/rest/connection-check",
@@ -384,19 +401,89 @@ Flight::route('GET /meho', function(){
     Flight::json(Flight::examService()->get_meho());
 });
 
-Flight::route('POST /meho/@id', function($id) {
-    if (!$id || $id == '') {
+Flight::route('POST /add', function () {
+    $data = Flight::request()->data->getData();
+
+    if (!isset($data['id']) || empty($data['id'])) {
         Flight::halt(400, "ID is required");
     }
 
-    try {
-        // Update product
-        $response = Flight::examService()->updateProductRandomNumber($id);
+    $id = $data['id'];
+    $imena_naka = $data['imena_naka'];
+    $prezimena_naka = $data['prezimena_naka'];
+    $brojevi_naki = $data['brojevi_naki'];
 
-        Flight::json($response, 201); // Created
+    try {
+        // Update entry
+        Flight::examService()->updateMeho($id, $imena_naka, $prezimena_naka, $brojevi_naki);
+
+        // Fetch updated data
+        $updatedData = Flight::examService()->get_meho_by_id($id); // Assuming you have a method to fetch by ID
+
+        if (!$updatedData) {
+            Flight::halt(404, "Entry not found after update");
+        }
+
+        Flight::json($updatedData, 200); // Return updated data as JSON
     } catch (Exception $e) {
         error_log("Error: " . $e->getMessage());
         Flight::halt($e->getCode() ?: 500, $e->getMessage());
     }
 });
+
+Flight::route('POST /add/meho', function() {
+    // $first_name = Flight::request()->data['first_name'];
+    // $last_name = Flight::request()->data['last_name'];
+    // $birth_date = Flight::request()->data['birth_date'];
+    // // $id = Flight::request()->data['id'];
+    // $result = Flight::examService()->add_customer($first_name, $last_name, $birth_date);
+    // Flight::json($result);
+    $data = Flight::request()->data->getData();
+    //$payload = Flight::request()->data->getData();
+    //$service = new ExamService();
+    $id = Flight::examService()->addMeho($data['imena_naka'], $data['prezimena_naka'], $data['brojevi_naki']);
+    $data['id'] = $id;
+    Flight::json($data);
+    /** TODO
+    * This endpoint should add the customer to the database
+    * The data that will come from the form (if you don't change
+    * the template form) has following properties
+    *   `first_name` -> first name of the customer
+    *   `last_name` -> last name of the customer
+    *   `birth_date` -> date when the customer has been born
+    * This endpoint should return the added customer in JSON format
+    * 10 points
+    */
+});
+
+Flight::route('GET /hello', function(){
+    echo 'Hello, world!';
+});
+
+// Update entry in the MEHO table
+Flight::route('PUT /meho/@id', function ($id) {
+    $data = Flight::request()->data->getData();
+    $imena_naka = $data['imena_naka'];
+    $prezimena_naka = $data['prezimena_naka'];
+    $brojevi_naki = $data['brojevi_naki'];
+
+    try {
+        // Update entry
+        Flight::examService()->updateMeho2($id, $imena_naka, $prezimena_naka, $brojevi_naki);
+
+        // Fetch updated data
+        $updatedData = Flight::examService()->get_meho_by_id($id); // Assuming you have a method to fetch by ID
+        
+        if (!$updatedData) {
+            Flight::halt(404, "Entry not found after update");
+        }
+
+        Flight::json($updatedData, 200); // Return updated data as JSON
+    } catch (Exception $e) {
+        error_log("Error: " . $e->getMessage());
+        Flight::halt($e->getCode() ?: 500, $e->getMessage());
+    }
+});
+
+
 ?>

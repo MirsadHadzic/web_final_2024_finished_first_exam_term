@@ -1,17 +1,95 @@
-<div class="container mt-3">
-    <div>
-      <table class="table table-striped" id='mehoTabela-table'>
-        <thead>
-          <tr>
-            <th>Imena Naka</th>
-            <th>Prezimena Naka</th>
-            <th>Brojevi Naki</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Dashboard</h1>
+    <ol class="breadcrumb mb-4">
+      <li class="breadcrumb-item active">Dashboard</li>
+    </ol>
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        DataTable Example
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <button id="btn-add" class="btn btn-success">Add Entry</button>
+        </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" id="tbl_meho">
+            <thead>
+              <tr>
+                <th>Actions</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
     </div>
+  </div>
+    <div class="modal fade" id="edit-meho-modal" tabindex="-1" aria-labelledby="edit-meho-label" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form id="edit-meho-form">
+              <div class="modal-header">
+                <h5 class="modal-title" id="edit-meho-label">Edit Entry</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" name="edit-id" id="edit-id" />
+                <div class="mb-3">
+                  <label for="edit-imena_naka" class="col-form-label">First Name:</label>
+                  <input type="text" class="form-control" name="edit-imena_naka" id="edit-imena_naka" />
+                </div>
+                <div class="mb-3">
+                  <label for="edit-prezimena_naka" class="col-form-label">Last Name:</label>
+                  <input type="text" class="form-control" name="edit-prezimena_naka" id="edit-prezimena_naka" />
+                </div>
+                <div class="mb-3">
+                  <label for="edit-brojevi_naki" class="col-form-label">Phone Number:</label>
+                  <input type="number" class="form-control" name="edit-brojevi_naki" id="edit-brojevi_naki" />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="btn-update">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="add-meho-modal" tabindex="-1" aria-labelledby="add-meho-label" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form id="add-meho-form">
+              <div class="modal-header">
+                <h5 class="modal-title" id="add-meho-label">Add Entry</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" name="id" id="id" />
+                <div class="mb-3">
+                  <label for="imena_naka" class="col-form-label">First Name:</label>
+                  <input type="text" class="form-control" name="imena_naka" id="imena_naka" />
+                </div>
+                <div class="mb-3">
+                  <label for="prezimena_naka" class="col-form-label">Last Name:</label>
+                  <input type="text" class="form-control" name="prezimena_naka" id="prezimena_naka" />
+                </div>
+                <div class="mb-3">
+                  <label for="brojevi_naki" class="col-form-label">Phone Number:</label>
+                  <input type="number" class="form-control" name="brojevi_naki" id="brojevi_naki" />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
   </div>
   
