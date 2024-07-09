@@ -27,7 +27,8 @@ use Firebase\JWT\Key;
 
 Flight::route('/*', function() {
     if (
-        strpos(Flight::request()->url, '/login') === 0
+        strpos(Flight::request()->url, '/login') === 0 ||
+        strpos(Flight::request()->url, '/logout') === 0
     ) {
         return TRUE;
     } else {
@@ -339,4 +340,63 @@ Flight::route('GET /nutrients', function(){
     Flight::json(Flight::examService()->get_nutrients());
 });
 
+FLight::route('GET /nutrients/@id', function($id){
+
+Flight::json(Flight::examService()->get_nutrients_by_id($id));
+
+});
+
+FLight::route('GET /meho/@id', function($id){
+
+    Flight::json(Flight::examService()->get_meho_by_id($id));
+    
+});
+
+Flight::route('DELETE /meho/@id', function($id) {
+    // Check if the population ID is provided
+    if (!$id || $id == '') {
+        Flight::halt(400, "ID is required");
+    }
+
+    // Check if the ID exists in the database
+    try {
+        $meho = Flight::examService()->get_meho_by_id($id);
+        if (!$meho) {
+            Flight::halt(404, "No ID with that number found");
+        }
+
+        // Delete the population by ID
+        Flight::examService()->delete_meho_by_id($id);
+        Flight::json(['message' => 'Deleted successfully'], 200);
+    } catch (Exception $e) {
+        Flight::halt(500, "An error occurred while deleting. Error: " . $e->getMessage());
+    }
+});
+
+
+Flight::route('GET /meho', function(){
+    /** TODO
+    * This endpoint returns list of all customers that will be used
+    * to populate the <select> list
+    * This endpoint should return output in JSON format
+    * 10 points
+    */
+    Flight::json(Flight::examService()->get_meho());
+});
+
+Flight::route('POST /meho/@id', function($id) {
+    if (!$id || $id == '') {
+        Flight::halt(400, "ID is required");
+    }
+
+    try {
+        // Update product
+        $response = Flight::examService()->updateProductRandomNumber($id);
+
+        Flight::json($response, 201); // Created
+    } catch (Exception $e) {
+        error_log("Error: " . $e->getMessage());
+        Flight::halt($e->getCode() ?: 500, $e->getMessage());
+    }
+});
 ?>

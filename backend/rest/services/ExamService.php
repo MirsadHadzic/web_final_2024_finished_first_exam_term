@@ -47,5 +47,35 @@ class ExamService {
         {
             return $this->dao->get_nutrients();
         }
+    public function get_nutrients_by_id($id)
+    {
+        return $this->dao->get_nutrients_by_id($id);
+    }
+    public function delete_meho_by_id($id)
+    {
+        return $this->dao->delete_meho_by_id($id);
+    }
+    public function get_meho_by_id($id)
+    {
+        return $this->dao->get_meho_by_id($id);
+    }
+    public function get_meho()
+    {
+        return $this->dao->get_meho();
+    }
+
+    public function updateProductRandomNumber($id) {
+        if (!$this->dao->get_meho_by_id($id)) {
+            throw new Exception("Product with ID $id not found", 404);
+        }
+
+        $updatedRows = $this->dao->updateRandomNumber($id);
+
+        if ($updatedRows > 0) {
+            return ["message" => "Random brojevi_naki for this ID updated successfully!"];
+        } else {
+            throw new Exception("No rows were updated", 500);
+        }
+    }
 }
 ?>

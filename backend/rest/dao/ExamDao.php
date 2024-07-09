@@ -34,6 +34,58 @@ class ExamDao {
       return $result;
   }
 
+  public function get_nutrients_by_id($id) {
+    // $query = "SELECT * FROM nutrients WHERE id = :id";
+    // $stmt = $this->conn->prepare($query);
+    // $stmt->execute($id);
+    // $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // return $result;
+
+    return $this->query_unique(
+      "SELECT * FROM nutrients WHERE id = :id",
+      [
+        'id' => $id
+      ]
+    );
+  }
+
+  public function get_meho_by_id($id) {
+    // $query = "SELECT * FROM nutrients WHERE id = :id";
+    // $stmt = $this->conn->prepare($query);
+    // $stmt->execute($id);
+    // $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // return $result;
+
+    return $this->query_unique(
+      "SELECT * FROM meho WHERE id = :id",
+      [
+        'id' => $id
+      ]
+    );
+  }
+
+  public function updateRandomNumber($id) {
+    // Generate a random number
+    $rand = rand(1, 200);
+
+    // Update the product
+    $stmt = $this->conn->prepare("UPDATE meho SET brojevi_naki = :rand WHERE id = :id");
+    $stmt->bindParam(':rand', $rand, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->rowCount(); // Returns the number of affected rows
+}
+
+  public function get_meho()
+  {
+    $query = "SELECT * FROM meho";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
     protected function query($query, $params) {
         $statement = $this->conn->prepare($query);
         $statement->execute($params);
@@ -44,6 +96,23 @@ class ExamDao {
         $results = $this->query($query, $params);
         return reset($results);
     }
+
+    protected function execute($query, $params) {
+      $prepared_statement = $this->conn->prepare($query);
+      if ($params) {
+      foreach ($params as $key => $param) {
+          $prepared_statement->bindValue($key, $param);
+      }
+      }
+      $prepared_statement->execute();
+      return $prepared_statement;
+  }
+
+  public function delete_meho_by_id($id)
+  {
+    $query = "DELETE FROM meho WHERE id = :id";
+    $this->execute($query, [":id" => $id]);
+  }
 
     public function get_customer_meals($customer_id) {
         return $this->query_unique(
